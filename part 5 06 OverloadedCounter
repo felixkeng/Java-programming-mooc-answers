@@ -1,0 +1,31 @@
+public class Counter {
+    private int startValue;
+    public Counter(int i){
+        startValue = i;
+    }
+    public Counter(){
+        this(0);
+    }
+    public void increase(){
+        this.increase(1);
+    }
+    public void decrease(){
+        this.decrease(1);
+    }
+    public void increase(int i){
+        if (i > 0){
+            startValue = startValue + i;
+        }
+        
+    }
+    public void decrease(int i){
+        if (i > 0){
+            startValue = startValue -i;
+        }
+        
+    }
+    public int value(){
+        return startValue;
+    }
+    
+}
