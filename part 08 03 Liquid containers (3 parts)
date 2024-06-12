@@ -1,0 +1,65 @@
+
+import java.util.Scanner;
+
+public class LiquidContainers {
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        int first = 0;
+        int second = 0;
+
+
+        while (true) {
+            System.out.println("First: " + first + "/100");
+            System.out.println("Second: " + second + "/100");
+
+            String input = scan.nextLine();
+            if (input.equals("quit")) {
+                break;
+            }
+            if (input.contains("add")){
+                String[] i = input.split(" ");
+                int num = Integer.valueOf(i[1]);
+                if (num > 0){
+                    first += Integer.valueOf(i[1]);
+                }
+                
+                if (first > 100){
+                    first = 100;
+                }
+            }
+            if (input.startsWith("move ")){
+                String[] i = input.split(" ");
+                int num = Integer.valueOf(i[1]);
+                if (num > 0){
+                    if (num > first){
+                        second += first;
+                        first = 0;
+                    } else {
+                        second += num;
+                        first -= num;
+                    }
+                }
+                
+                if (second > 100){
+                    second = 100;
+                }
+            }
+            if (input.contains("remove ")){
+                String[] i = input.split(" ");
+                int num = Integer.valueOf(i[1]);
+                if (num > 0){
+                    second -= Integer.valueOf(i[1]);
+                }
+                
+                if (second < 0){
+                    second = 0;
+                }
+            }
+            
+                    
+
+        }
+    }
+
+}
