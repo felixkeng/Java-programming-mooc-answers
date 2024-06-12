@@ -1,0 +1,77 @@
+
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class mainProgram {
+
+    public static void main(String[] args) {
+        // NB! Do not create other scanner objects than the one below
+        // if and when you create other classes, pass the scanner to them
+        // as a parameter
+
+        Scanner scan = new Scanner(System.in);
+        ArrayList<Bird> birds = new ArrayList<>();
+        ArrayList<String> observe = new ArrayList<>();
+        while (true){
+            System.out.println("?");
+            String command = scan.nextLine();
+            if (command.equals("Quit")){
+                break;
+            }
+            if (command.equals("Add")){
+                System.out.println("Name: ");
+                String name = scan.nextLine();
+                System.out.println("Name in Latin: ");
+                String latin = scan.nextLine();
+                birds.add(new Bird(name, latin));
+            }
+            if (command.equals("Observation")){
+                boolean tu = true;
+                String b = scan.nextLine();
+                for (Bird i : birds){
+                    if (i.name().equals(b)){
+                        observe.add(b);
+                        tu = false;
+                    }
+                    
+                }
+                if (tu){
+                    System.out.println("Not a bird!");
+                }
+                
+            }
+            if (command.equals("All")){
+                
+                for (Bird i : birds){
+                    int num = 0;
+                    for (String a : observe){
+                        if (i.name().equals(a)){
+                            num++;
+                        }
+                    }
+                    System.out.println(i.name() + " (" + i.latin() + "): " + num + " observations");
+                }
+                
+            }
+            if (command.equals("One")){
+                int num = 0;
+                System.out.println("Bird? ");
+                String bird = scan.nextLine();
+                for (String i : observe){
+                    if (i.equals(bird)){
+                        num++;
+                    }
+                }
+                for (Bird i : birds){
+                    if (i.name().equals(bird)){
+                        System.out.println(i.name() + " (" + i.latin() + "): " + num + " observations");
+                    }
+                }
+                
+            }
+            
+        }
+
+    }
+
+}
