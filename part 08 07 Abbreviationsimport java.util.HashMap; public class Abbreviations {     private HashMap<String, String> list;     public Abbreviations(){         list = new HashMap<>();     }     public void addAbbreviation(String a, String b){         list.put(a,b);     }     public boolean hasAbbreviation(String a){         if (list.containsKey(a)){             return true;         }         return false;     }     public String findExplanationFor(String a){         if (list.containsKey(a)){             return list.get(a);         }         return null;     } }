@@ -1,0 +1,22 @@
+import java.util.HashMap;
+public class Abbreviations {
+    private HashMap<String, String> list;
+    public Abbreviations(){
+        list = new HashMap<>();
+    }
+    public void addAbbreviation(String a, String b){
+        list.put(a,b);
+    }
+    public boolean hasAbbreviation(String a){
+        if (list.containsKey(a)){
+            return true;
+        }
+        return false;
+    }
+    public String findExplanationFor(String a){
+        if (list.containsKey(a)){
+            return list.get(a);
+        }
+        return null;
+    }
+}
