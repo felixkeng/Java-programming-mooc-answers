@@ -1,0 +1,13 @@
+    public boolean equals(Object object){
+        if (this == object){
+        return true;
+        }
+        if (this.getClass() != object.getClass()){
+            return false;
+        }
+        SimpleDate compare = (SimpleDate) object;
+        if (this.toString().equals(compare.toString())){
+            return true;
+        }
+        return false;
+    }
