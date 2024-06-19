@@ -1,0 +1,23 @@
+import java.util.ArrayList;
+import java.util.List;
+public class Herd implements Movable{
+    private List<Movable> list;
+    public Herd(){
+        list = new ArrayList<>();
+    }
+    public String toString(){
+        String all = "";
+        for (Movable i : list){
+            all = all + i.toString() + "\n";
+        }
+        return all;
+    }
+    public void addToHerd(Movable movable){
+        list.add(movable);
+    }
+    public void move(int x, int y){
+        for (Movable i : list){
+            i.move(x,y);
+        }
+    }
+}
