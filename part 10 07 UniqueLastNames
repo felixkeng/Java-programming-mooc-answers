@@ -1,0 +1,5 @@
+persons.stream()
+                .map(i -> i.getLastName())
+                .distinct()
+                .sorted()
+                .forEach(i -> System.out.println(i));
