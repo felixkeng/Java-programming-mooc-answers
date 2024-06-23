@@ -1,0 +1,50 @@
+package application;
+
+/**
+ *
+ * @author felixkeng
+ */
+import java.util.*;
+public class AverageSensor implements Sensor{
+    private ArrayList<Sensor> list;
+    private ArrayList<Integer> readings;
+    public AverageSensor(){
+        list = new ArrayList<>();
+        readings = new ArrayList<>();
+    }
+    public void addSensor(Sensor add){
+        list.add(add);
+    }
+    public void setOn(){
+        list.stream().forEach(i -> i.setOn());
+    }
+    public void setOff(){
+        if (list.size() == 0){
+            return;
+        }
+        int i = new Random().nextInt(list.size());
+        list.get(i).setOff();
+    }
+    public int read(){
+        if (list.size() == 0 || this.isOn() == false){
+            throw new IllegalStateException();
+        }
+        double averageTemperature = list.stream()
+                .mapToInt(s -> Integer.valueOf(s.read()))
+                .average().getAsDouble();
+        
+        readings.add((int) averageTemperature);
+        return (int) averageTemperature;
+    }
+    public boolean isOn(){
+        for (Sensor i : list){
+            if (i.isOn() == false){
+                return false;
+            }
+        }
+        return true;
+    }
+    public List<Integer> readings(){
+        return readings;
+    }
+}
