@@ -1,0 +1,27 @@
+
+import java.util.Scanner;
+
+public class Program {
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        // test your method here
+
+    }
+    public static int sum(int[] list, int start, int end, int smallest, int biggest){
+        int total = 0;
+        if (start < 0){
+            start = 0;
+        }
+        if (end > list.length){
+            end = list.length;
+        }
+        for (int i = start; i < end; i++){
+            if (list[i] <= biggest && list[i] >= smallest){
+            total += list[i];
+        }
+        }
+        return total;
+    }
+
+}
