@@ -1,0 +1,34 @@
+private HashMap<String, HashMap<Integer, Double>> readVoterFile(String filename) {
+        HashMap<String, HashMap<Integer, Double>> values1 = new HashMap<>();
+        ArrayList<Integer> yearList = new ArrayList<>();
+
+        try(Scanner data = new Scanner(Paths.get(filename))) {
+            String row = data.nextLine();
+            String[] stringArr = row.split("\t");
+            for (int i = 1; i < stringArr.length; i++) { // skip first
+                yearList.add(Integer.parseInt(stringArr[i]));
+            }
+
+            while (data.hasNext()) {
+                String next = data.nextLine();
+                stringArr = next.split("\t");
+                String party = stringArr[0];
+                HashMap<Integer, Double> map = new HashMap<>();
+                for (int i = 1; i < stringArr.length; i++) {
+                    if (!stringArr[i].equals("-")) {
+                        int year = yearList.get(i-1);
+                        String dat = stringArr[i];
+                        double number = Double.parseDouble(dat);
+                        map.put(year, number);
+                    }
+
+                }
+                values1.put(party, map);
+            }
+
+        } catch(IOException e) {
+            System.err.println("Error: " + e.toString());
+        }
+
+        return values1;
+    }
