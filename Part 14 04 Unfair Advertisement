@@ -1,0 +1,10 @@
+gc.setFill(Color.BLACK);
+        gc.fillRect(70, 60, 25, 25);//left eye
+
+        gc.fillRect(200, 60, 25, 25);//right eye
+
+        gc.fillRect(75, 200, 150, 25); //mouth line
+
+        gc.fillRect(75, 175, 25, 25); //leeft mouth corner
+
+        gc.fillRect(200, 175, 25, 25);//right mouth courner
