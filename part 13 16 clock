@@ -1,0 +1,85 @@
+# WRITE YOUR SOLUTION HERE:
+import pygame
+import math
+import time
+
+# Initialize Pygame
+pygame.init()
+
+# Set up the display
+window_width, window_height = 400, 400
+window = pygame.display.set_mode((window_width, window_height))
+pygame.display.set_caption("Clock")
+
+# Define colors
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+BLUE = (0, 0, 255)
+
+# Function to draw the clock
+def draw_clock(hour, minute, second):
+    # Draw clock face
+    center = (window_width // 2, window_height // 2)
+    radius = 150
+
+    pygame.draw.circle(window, WHITE, center, radius)
+    pygame.draw.circle(window, BLACK, center, radius, 5)  # Outer border
+
+    # Draw clock markings for hours
+    for i in range(12):
+        angle = math.radians(i * 30)
+        start_pos = (center[0] + radius * 0.8 * math.cos(angle),
+                     center[1] + radius * 0.8 * math.sin(angle))
+        end_pos = (center[0] + radius * 0.9 * math.cos(angle),
+                   center[1] + radius * 0.9 * math.sin(angle))
+        pygame.draw.line(window, BLACK, start_pos, end_pos, 3)
+
+    # Calculate the angles for the hands
+    second_angle = math.radians(second * 6)  # 360 degrees / 60 seconds = 6 degrees per second
+    minute_angle = math.radians(minute * 6 + second * 0.1)  # 360 degrees / 60 minutes = 6 degrees per minute
+    hour_angle = math.radians((hour % 12) * 30 + minute * 0.5)  # 360 degrees / 12 hours = 30 degrees per hour
+
+    # Draw the second hand
+    second_hand = (center[0] + radius * 0.75 * math.sin(second_angle),
+                   center[1] - radius * 0.75 * math.cos(second_angle))
+    pygame.draw.line(window, RED, center, second_hand, 2)
+
+    # Draw the minute hand
+    minute_hand = (center[0] + radius * 0.65 * math.sin(minute_angle),
+                   center[1] - radius * 0.65 * math.cos(minute_angle))
+    pygame.draw.line(window, BLUE, center, minute_hand, 4)
+
+    # Draw the hour hand
+    hour_hand = (center[0] + radius * 0.5 * math.sin(hour_angle),
+                 center[1] - radius * 0.5 * math.cos(hour_angle))
+    pygame.draw.line(window, GREEN, center, hour_hand, 6)
+
+# Main game loop
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    # Get the current time
+    current_time = time.localtime()
+    hour = current_time.tm_hour
+    minute = current_time.tm_min
+    second = current_time.tm_sec
+
+    # Fill the background
+    window.fill(BLACK)
+
+    # Draw the clock with the current time
+    draw_clock(hour, minute, second)
+
+    # Update the display
+    pygame.display.flip()
+
+    # Limit frame rate
+    pygame.time.delay(1000)  # Update every second
+
+# Quit Pygame
+pygame.quit()
